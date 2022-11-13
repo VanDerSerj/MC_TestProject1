@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "Orders")
 public class Orders {
     @Id
-    @Column
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "name")
     @NotNull
@@ -25,11 +25,6 @@ public class Orders {
     @NotNull
     private Integer age;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "purchase_item", referencedColumnName = "name")
-    private Purchase purchase;
-
     @Column(name = "count")
     @NotNull
     private Integer count;
@@ -38,16 +33,37 @@ public class Orders {
     @NotNull
     private Double amount;
 
-    @Column(name = "purchase_date")
+    @Column(name = "orders_date_time")
     @NotNull
-    private LocalDateTime purchaseDate;
+    private LocalDateTime ordersDateTime;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "purchase_item", referencedColumnName = "name")
+    private Purchase purchase;
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
+    }
+
+    public LocalDateTime getOrdersDateTime() {
+        return ordersDateTime;
+    }
+
+    public void setOrdersDateTime(LocalDateTime ordersDateTime) {
+        this.ordersDateTime = ordersDateTime;
+    }
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 
     public String getName() {
@@ -74,12 +90,12 @@ public class Orders {
         this.age = age;
     }
 
-    public Purchase getPurchase() {
-        return purchase;
+    public Double getAmount() {
+        return amount;
     }
 
-    public void setPurchase(Purchase purchase) {
-        this.purchase = purchase;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
     public Integer getCount() {
@@ -90,27 +106,8 @@ public class Orders {
         this.count = count;
     }
 
-    public Double getAmount() {
-        return amount;
+    public String getDateFormat () {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(this.ordersDateTime);
+
     }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public LocalDateTime getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
-
-
-    public String getDateFormat (LocalDateTime localDateTime) {
-        String DATE_PATTERN = "yyyy-MM-dd";
-        return DateTimeFormatter.ofPattern(DATE_PATTERN).format(localDateTime);
-    }
-
-
 }

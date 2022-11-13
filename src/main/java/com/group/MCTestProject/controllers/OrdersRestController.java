@@ -20,8 +20,7 @@ import java.util.stream.Collectors;
 import static com.group.MCTestProject.util.ErrorsUtil.returnErrorsToClient;
 
 @RestController
-//@Controller
-@RequestMapping("/od")
+@RequestMapping("/rest_orders")
 public class OrdersRestController {
 
     private final OrdersService ordersService;
@@ -30,18 +29,13 @@ public class OrdersRestController {
 
     @Autowired
     public OrdersRestController(OrdersService ordersService,
-                                OrdersValidator ordersValidator,
-                                ModelMapper modelMapper) {
+                            OrdersValidator ordersValidator,
+                            ModelMapper modelMapper) {
         this.ordersService = ordersService;
         this.ordersValidator = ordersValidator;
         this.modelMapper = modelMapper;
     }
 
-
-
-
-
-    //@ResponseBody
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> add(@RequestBody @Valid OrdersDTO ordersDTO,
                                           BindingResult bindingResult) {
@@ -55,15 +49,19 @@ public class OrdersRestController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-
-    //@ResponseBody
     @GetMapping()
     public OrdersResponse getOrders() {
+        // Обычно список из элементов оборачивается в один объект для пересылки
         return new OrdersResponse(ordersService.findAll().stream().map(this::convertToOrdersDTO)
                 .collect(Collectors.toList()));
     }
+/*
+    @GetMapping("/rainyDaysCount")
+    public Long getRainyDaysCount() {
+        return ordersService.findAll().stream().filter(Orders::isRaining).count();
+    }
+ */
 
-    //@ResponseBody
     @GetMapping("/lastWeekOrders")
     public OrdersResponse getLastWeekOrders() {
         //TODO: Вывести список покупок за последнюю неделю
@@ -71,7 +69,7 @@ public class OrdersRestController {
                 .collect(Collectors.toList()));
     }
 
-    //@ResponseBody
+
     @GetMapping("/maxPurchased")
     public OrdersResponse getMaxPurchased() {
         //TODO: Вывести самый покупаемый товар за последний месяц
@@ -79,7 +77,7 @@ public class OrdersRestController {
                 .collect(Collectors.toList()));
     }
 
-    //@ResponseBody
+
     @GetMapping("/maxHalfYearCustomer")
     public OrdersResponse getMaxHalfYearCustomer() {
         //TODO: Вывести имя и фамилию человека, совершившего больше всего покупок за полгода
@@ -87,7 +85,7 @@ public class OrdersRestController {
                 .collect(Collectors.toList()));
     }
 
-    //@ResponseBody
+
     @GetMapping("/maxEighteenPurchase")
     public OrdersResponse getMaxEighteenPurchase() {
         //TODO: Что чаще всего покупают люди в возрасте 18 лет
@@ -112,6 +110,4 @@ public class OrdersRestController {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-
-
 }

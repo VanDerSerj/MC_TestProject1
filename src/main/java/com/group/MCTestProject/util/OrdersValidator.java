@@ -2,7 +2,6 @@ package com.group.MCTestProject.util;
 
 import com.group.MCTestProject.models.Orders;
 import com.group.MCTestProject.services.PurchaseService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -34,6 +33,4 @@ public class OrdersValidator implements Validator {
         if (purchaseService.findByName(orders.getPurchase().getName()).isEmpty())
             errors.rejectValue("purchase", "Doesn't exist");
     }
-
-
 }

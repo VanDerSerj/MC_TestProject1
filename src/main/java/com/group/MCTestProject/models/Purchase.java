@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "purchase")
+@Table(name = "Purchase")
 public class Purchase implements Serializable {
     @Id
     @Column(name = "id")
@@ -14,8 +14,8 @@ public class Purchase implements Serializable {
     private Integer id;
 
     @Column(name = "name")
-    @NotEmpty(message = "Could not be empty!")
-    @Size(min = 1, max = 300, message = "Item name should be between 1 and 100 characters!")
+    @NotEmpty(message = "Must not be empty")
+    @Size(min = 1, max = 100, message = "Must has between from 1 to 100 characters")
     private String name;
 
     public Integer getId() {

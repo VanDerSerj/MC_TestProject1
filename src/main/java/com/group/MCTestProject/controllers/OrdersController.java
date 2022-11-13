@@ -46,7 +46,7 @@ public class OrdersController {
         return "orders/new";
     }
 
-/*    @PostMapping()
+    @PostMapping()
     public String create(@ModelAttribute("orders") @Valid Orders orders,
                          BindingResult bindingResult) {
         ordersValidator.validate(orders, bindingResult);
@@ -56,8 +56,8 @@ public class OrdersController {
 
         ordersService.addOrders(orders);
         return "redirect:/orders";
-    } */
-    @PostMapping()
+    }
+/*    @PostMapping()
     public String create(@ModelAttribute("orders") @Valid OrderDTO orderDTO,
                          BindingResult bindingResult) {
         Orders ordersToAdd = convertToOrders(orderDTO);
@@ -68,7 +68,7 @@ public class OrdersController {
 
         ordersService.addOrders(ordersToAdd);
         return "redirect:/orders";
-    }
+    } */
 
 
 

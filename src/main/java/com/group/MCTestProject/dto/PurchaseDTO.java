@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class PurchaseDTO {
-    @NotEmpty(message = "Should not be empty")
+    @NotEmpty(message = "Must not be empty")
     private String name;
 
     public String getName() {

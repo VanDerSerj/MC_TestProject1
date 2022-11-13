@@ -6,7 +6,6 @@ import org.springframework.validation.FieldError;
 import java.util.List;
 
 public class ErrorsUtil {
-
     public static void returnErrorsToClient(BindingResult bindingResult) {
         StringBuilder errorMsg = new StringBuilder();
 
@@ -18,6 +17,5 @@ public class ErrorsUtil {
         }
 
         throw new OrdersException(errorMsg.toString());
-
     }
 }

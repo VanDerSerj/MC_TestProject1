@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+
+
+
+
+
 @Service
 @Transactional(readOnly = true)
 public class OrdersService {
@@ -22,7 +27,9 @@ public class OrdersService {
         this.purchaseService = purchaseService;
     }
 
-    public List<Orders> findAll() { return ordersRepository.findAll();}
+    public List<Orders> findAll() {
+        return ordersRepository.findAll();
+    }
 
     @Transactional
     public void addOrders(Orders orders) {
@@ -30,12 +37,14 @@ public class OrdersService {
         ordersRepository.save(orders);
     }
 
-
     public void enrichOrders(Orders orders) {
+        // мы должны сами найти сенсор из БД по имени и вставить объект из Hibernate persistence context'а
         orders.setPurchase(purchaseService.findByName(orders.getPurchase().getName()).get());
-        orders.setPurchaseDate(LocalDateTime.now());
+
+        orders.setOrdersDateTime(LocalDateTime.now());
     }
 
-    //TODO: add delete method
 
+
+    //TODO: add delete method
 }

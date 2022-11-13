@@ -3,7 +3,6 @@ package com.group.MCTestProject.dto;
 import java.util.List;
 
 public class OrdersResponse {
-
     private List<OrdersDTO> orders;
 
     public OrdersResponse(List<OrdersDTO> orders) {

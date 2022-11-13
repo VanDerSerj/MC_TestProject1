@@ -1,7 +1,4 @@
 package com.group.MCTestProject.dto;
-
-import com.group.MCTestProject.models.Purchase;
-
 import javax.validation.constraints.NotNull;
 
 public class OrdersDTO {
@@ -16,14 +13,21 @@ public class OrdersDTO {
     private Integer age;
 
     @NotNull
-    private PurchaseDTO purchase;
-
-    @NotNull
     private Integer count;
 
     @NotNull
     private Double amount;
 
+    @NotNull
+    private PurchaseDTO purchase;
+
+    public PurchaseDTO getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(PurchaseDTO purchase) {
+        this.purchase = purchase;
+    }
 
     public String getName() {
         return name;
@@ -49,12 +53,12 @@ public class OrdersDTO {
         this.age = age;
     }
 
-    public PurchaseDTO getPurchase() {
-        return purchase;
+    public Double getAmount() {
+        return amount;
     }
 
-    public void setPurchase(PurchaseDTO purchase) {
-        this.purchase = purchase;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
     public Integer getCount() {
@@ -63,13 +67,5 @@ public class OrdersDTO {
 
     public void setCount(Integer count) {
         this.count = count;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
     }
 }

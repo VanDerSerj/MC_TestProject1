@@ -9,14 +9,14 @@
 
 
 <div th:each="orders : ${orders}">
-  <a th:href="@{/orders/{id}(id=${person.getId()})}"
-     th:text="${orders.getName() + ' ' + orders.getLastname() + ', ' + orders.getAge() + 'y.o., ' + orders.getPurchase + ', ' + orders.getCount() + 'ea,' + orders.getAmount() + 'total price, ' + order.getPurchaseDate().getDateFormat() }">order</a>
+  <a th:href="@{/orders/{id}(id=${orders.getId()})}"
+     th:text="${'Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</a>
 </div>
 
 <br/>
 <hr/>
 
-<a href="/orders/new">Добавить заказ</a>
+<a href="/orders/new">Add order</a>
 
 </body>
 </html>

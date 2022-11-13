@@ -52,7 +52,7 @@ public class SignDetails implements UserDetails {
     }
 
     // Нужно, чтобы получать данные аутентифицированного пользователя
-    public Sign getPerson() {
+    public Sign getSign() {
         return this.sign;
     }
 }
