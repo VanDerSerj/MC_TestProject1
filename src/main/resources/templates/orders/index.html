@@ -10,13 +10,21 @@
 
 <div th:each="orders : ${orders}">
   <a th:href="@{/orders/{id}(id=${orders.getId()})}"
-     th:text="${'Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</a>
+     th:text="${'Id: ' + orders.getId + ', Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</a>
+
+  <a th:href="@{/orders/{id}(id=${orders.getId()})}"> Open </a>
+
 </div>
+
+
 
 <br/>
 <hr/>
 
 <a href="/orders/new">Add order</a>
+
+
+
 
 </body>
 </html>

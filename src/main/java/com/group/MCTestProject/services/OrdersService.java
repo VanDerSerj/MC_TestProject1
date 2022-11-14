@@ -7,11 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-
-
-
-
+import java.util.Optional;
 
 
 @Service
@@ -38,13 +34,19 @@ public class OrdersService {
     }
 
     public void enrichOrders(Orders orders) {
-        // мы должны сами найти сенсор из БД по имени и вставить объект из Hibernate persistence context'а
+        // берем пукупку из БД (по имени) и вставлем объект из Hibernate persistence context'а
         orders.setPurchase(purchaseService.findByName(orders.getPurchase().getName()).get());
-
         orders.setOrdersDateTime(LocalDateTime.now());
     }
 
+    public Orders findOne(int id) {
+        Optional<Orders> foundPerson = ordersRepository.findById(id);
+        return foundPerson.orElse(null);
+    }
 
 
-    //TODO: add delete method
+    @Transactional
+    public void delete(int id) {
+        ordersRepository.deleteById(id);
+    }
 }

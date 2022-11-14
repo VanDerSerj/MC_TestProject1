@@ -70,6 +70,19 @@ public class OrdersController {
         return "redirect:/orders";
     } */
 
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        ordersService.delete(id);
+        return "redirect:/orders";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("orders", ordersService.findOne(id));
+
+        return "orders/show";
+    }
+
 
 
 
