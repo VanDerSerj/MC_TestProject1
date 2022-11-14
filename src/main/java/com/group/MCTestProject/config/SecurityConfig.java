@@ -30,11 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //disable Spring Security
-    @Override
+ /*   @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable();
         httpSecurity.authorizeRequests().antMatchers("/").permitAll();
-    }
+    } */
 
 
     @Bean
