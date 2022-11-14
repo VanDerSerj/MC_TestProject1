@@ -18,6 +18,9 @@ public class Purchase implements Serializable {
     @Size(min = 1, max = 100, message = "Must has between from 1 to 100 characters")
     private String name;
 
+    public Purchase() {
+    }
+
     public Integer getId() {
         return id;
     }

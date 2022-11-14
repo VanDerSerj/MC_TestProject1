@@ -1,11 +1,14 @@
 package com.group.MCTestProject.controllers;
 
-import com.group.MCTestProject.dto.OrderDTO;
+
 import com.group.MCTestProject.dto.OrdersDTO;
 import com.group.MCTestProject.dto.OrdersResponse;
 import com.group.MCTestProject.models.Orders;
+import com.group.MCTestProject.models.Purchase;
 import com.group.MCTestProject.services.OrdersService;
+import com.group.MCTestProject.services.PurchaseService;
 import com.group.MCTestProject.util.OrdersValidator;
+import org.hibernate.criterion.Order;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,14 +32,20 @@ public class OrdersController {
 
     private final OrdersService ordersService;
     private final OrdersValidator ordersValidator;
+
+    private final PurchaseService purchaseService;
     private final ModelMapper modelMapper;
+
+
 
     @Autowired
     public OrdersController(OrdersService ordersService,
                             OrdersValidator ordersValidator,
+                            PurchaseService purchaseService,
                             ModelMapper modelMapper) {
         this.ordersService = ordersService;
         this.ordersValidator = ordersValidator;
+        this.purchaseService = purchaseService;
         this.modelMapper = modelMapper;
     }
 
@@ -45,6 +54,7 @@ public class OrdersController {
         model.addAttribute("orders", ordersService.findAll());
         return "orders/index";
     }
+
 
     @GetMapping("/weekly")
     public String lastWeekOrders(Model model) {
@@ -58,34 +68,33 @@ public class OrdersController {
         return "orders/maxpurch";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/newold")
     public String newOrders(@ModelAttribute("orders") Orders orders) {
         return "orders/new";
     }
+    @GetMapping("/new")
+    public String showItems(Model model,
+                            @ModelAttribute("purchase") Purchase purchase,
+                            @ModelAttribute("orders") Orders orders) {
+        model.addAttribute("purchase_items", purchaseService.findAll());
+        return "orders/items";
+    }
+
 
     @PostMapping()
     public String create(@ModelAttribute("orders") @Valid Orders orders,
                          BindingResult bindingResult) {
+
+
         ordersValidator.validate(orders, bindingResult);
 
         if (bindingResult.hasErrors())
-            return "orders/new";
+            return "orders/items";
 
         ordersService.addOrders(orders);
+        //ordersService.save(orders);
         return "redirect:/orders";
     }
-/*    @PostMapping()
-    public String create(@ModelAttribute("orders") @Valid OrderDTO orderDTO,
-                         BindingResult bindingResult) {
-        Orders ordersToAdd = convertToOrders(orderDTO);
-
-        ordersValidator.validate(ordersToAdd, bindingResult);
-        if (bindingResult.hasErrors())
-            return "orders/new";
-
-        ordersService.addOrders(ordersToAdd);
-        return "redirect:/orders";
-    } */
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
@@ -99,13 +108,5 @@ public class OrdersController {
 
         return "orders/show";
     }
-
-
-
-
-    private Orders convertToOrders(OrderDTO orderDTO) {
-        return modelMapper.map(orderDTO, Orders.class);
-    }
-
 
 }

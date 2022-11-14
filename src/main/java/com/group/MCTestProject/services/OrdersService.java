@@ -33,8 +33,13 @@ public class OrdersService {
         ordersRepository.save(orders);
     }
 
+    @Transactional
+    public void save(Orders orders) {
+        ordersRepository.save(orders);
+    }
+
     public void enrichOrders(Orders orders) {
-        // берем пукупку из БД (по имени) и вставлем объект из Hibernate persistence context'а
+        // берем покупку из БД (по имени) и вставлем объект из Hibernate persistence context'а
         orders.setPurchase(purchaseService.findByName(orders.getPurchase().getName()).get());
         orders.setOrdersDateTime(LocalDateTime.now());
     }

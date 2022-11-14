@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 public class Orders {
     @Id
     @Column(name = "id")
@@ -41,6 +41,18 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "purchase_item", referencedColumnName = "name")
     private Purchase purchase;
+
+    public Orders() {
+    }
+
+    public Orders(String name, String lastname, Integer age, Integer count, Double amount, LocalDateTime ordersDateTime) {
+        this.name = name;
+        this.lastname = lastname;
+        this.age = age;
+        this.count = count;
+        this.amount = amount;
+        this.ordersDateTime = ordersDateTime;
+    }
 
     public Integer getId() {
         return id;

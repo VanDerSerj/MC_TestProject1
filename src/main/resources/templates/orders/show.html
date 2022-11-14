@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<p th:text="${'Id: ' + orders.getId + ', Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</p>
+<p th:text="${'Id: ' + orders.getId + ', Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase().getName() + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</p>
 
 <form th:method="DELETE" th:action="@{/orders/{id}(id=${orders.getId()})}">
     <input type="submit" value="Delete"/>

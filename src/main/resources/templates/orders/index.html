@@ -6,22 +6,20 @@
 </head>
 <body>
 
-
-
+<a>ORDERS LIST:</a>
+<br/>
 <div th:each="orders : ${orders}">
   <a th:href="@{/orders/{id}(id=${orders.getId()})}"
-     th:text="${'Id: ' + orders.getId + ', Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</a>
+     th:text="${'Id: ' + orders.getId + ', Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase().getName() + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</a>
 
-  <a th:href="@{/orders/{id}(id=${orders.getId()})}">            DELETE ORDER </a>
+  <a th:href="@{/orders/{id}(id=${orders.getId()})}"> (DELETE ORDER) </a>
 
 </div>
-
-
 
 <br/>
 <hr/>
 
-<a href="/orders/new">Add order</a>
+<a href="/orders/new">Add new order</a>
 <br/>
 <br/>
 
@@ -34,9 +32,6 @@
 <a href="/orders/weekly">Show the person who made the most purchases</a>
 <br/>
 <a href="/orders/weekly">Show the most purchased product for 18 y.o. customer</a>
-
-
-
 
 </body>
 </html>
