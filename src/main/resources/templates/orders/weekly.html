@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Index</title>
+  <title>Last Week Orders</title>
 </head>
 <body>
 
@@ -11,31 +11,12 @@
 <div th:each="orders : ${orders}">
   <a th:href="@{/orders/{id}(id=${orders.getId()})}"
      th:text="${'Id: ' + orders.getId + ', Name: ' + orders.getName() + ', Last Name: ' + orders.getLastname() + ', Age: ' + orders.getAge() + ', Purchase_item: ' + orders.getPurchase + ', Count:' + orders.getCount() + ', Amount: ' + orders.getAmount() + ', Order date: ' + orders.getDateFormat() }">order</a>
-
-  <a th:href="@{/orders/{id}(id=${orders.getId()})}">            DELETE ORDER </a>
-
 </div>
 
 
 
 <br/>
 <hr/>
-
-<a href="/orders/new">Add order</a>
-<br/>
-<br/>
-
-<a>REPORTS:</a>
-<br/>
-<a href="/orders/weekly">Show last week orders</a>
-<br/>
-<a href="/orders/maxpurch">Show the most purchased product</a>
-<br/>
-<a href="/orders/weekly">Show the person who made the most purchases</a>
-<br/>
-<a href="/orders/weekly">Show the most purchased product for 18 y.o. customer</a>
-
-
 
 
 </body>

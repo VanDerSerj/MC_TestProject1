@@ -2,6 +2,7 @@ package com.group.MCTestProject.controllers;
 
 import com.group.MCTestProject.dto.OrderDTO;
 import com.group.MCTestProject.dto.OrdersDTO;
+import com.group.MCTestProject.dto.OrdersResponse;
 import com.group.MCTestProject.models.Orders;
 import com.group.MCTestProject.services.OrdersService;
 import com.group.MCTestProject.util.OrdersValidator;
@@ -15,6 +16,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 import static com.group.MCTestProject.util.ErrorsUtil.returnErrorsToClient;
 
@@ -39,6 +44,18 @@ public class OrdersController {
     public String index(Model model) {
         model.addAttribute("orders", ordersService.findAll());
         return "orders/index";
+    }
+
+    @GetMapping("/weekly")
+    public String lastWeekOrders(Model model) {
+        model.addAttribute("orders", ordersService.findAll().stream().filter(s-> (s.getOrdersDateTime().compareTo(LocalDateTime.now().with(DayOfWeek.MONDAY))) <= 0).collect(Collectors.toList()));
+        return "orders/weekly";
+    }
+
+    @GetMapping("/maxpurch")
+    public String maxPurch(Model model) {
+        model.addAttribute("orders", ordersService.findAll().stream().filter(s-> (s.getOrdersDateTime().compareTo(LocalDateTime.now().with(DayOfWeek.MONDAY))) == 0).collect(Collectors.toList()));
+        return "orders/maxpurch";
     }
 
     @GetMapping("/new")
